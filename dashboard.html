@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | Prapanj K T</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+    <main class="dashboard-page">
+
+        <div class="dashboard-header">
+
+            <div>
+                <p class="intro">
+                    Prapanj Blog
+                </p>
+
+                <h1>
+                    Dashboard
+                </h1>
+            </div>
+
+            <button id="logout-button">
+                Logout
+            </button>
+
+        </div>
+
+
+        <section class="editor-box">
+
+            <h2>
+                Write a new blog
+            </h2>
+
+
+            <label for="title">
+                Title
+            </label>
+
+            <input
+                type="text"
+                id="title"
+                placeholder="Enter blog title"
+            >
+
+
+            <label for="subtitle">
+                Subtitle
+            </label>
+
+            <input
+                type="text"
+                id="subtitle"
+                placeholder="Enter a short description"
+            >
+
+
+            <label for="content">
+                Content
+            </label>
+
+            <textarea
+                id="content"
+                placeholder="Write your blog here..."
+            ></textarea>
+
+
+            <div class="editor-buttons">
+
+                <button
+                    id="draft-button"
+                    class="button"
+                >
+                    Save Draft
+                </button>
+
+                <button
+                    id="publish-button"
+                    class="button"
+                >
+                    Publish
+                </button>
+
+            </div>
+
+
+            <p id="status"></p>
+
+        </section>
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <script>
+
+        const SUPABASE_URL =
+            "https://jgafjlpkdfamvoywggtt.supabase.co";
+
+        const SUPABASE_PUBLISHABLE_KEY =
+            "sb_publishable_QF5kwYRijdV_0xNomd3LWw_893w-ND2";
+
+
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_PUBLISHABLE_KEY
+            );
+
+
+        const status =
+            document.getElementById("status");
+
+
+        async function checkLogin() {
+
+            const { data } =
+                await supabaseClient.auth.getSession();
+
+
+            if (!data.session) {
+
+                window.location.href = "admin.html";
+
+            }
+
+        }
+
+
+        checkLogin();
+
+
+        document
+            .getElementById("logout-button")
+            .addEventListener("click", async function() {
+
+                await supabaseClient.auth.signOut();
+
+                window.location.href = "admin.html";
+
+            });
+
+
+        async function savePost(published) {
+
+            const title =
+                document.getElementById("title").value.trim();
+
+            const subtitle =
+                document.getElementById("subtitle").value.trim();
+
+            const content =
+                document.getElementById("content").value.trim();
+
+
+            if (!title || !content) {
+
+                status.textContent =
+                    "Please enter a title and content.";
+
+                return;
+
+            }
+
+
+            status.textContent =
+                "Saving...";
+
+
+            const { data: userData } =
+                await supabaseClient.auth.getUser();
+
+
+            if (!userData.user) {
+
+                window.location.href = "admin.html";
+
+                return;
+
+            }
+
+
+            const { error } =
+                await supabaseClient
+                    .from("posts")
+                    .insert({
+
+                        title: title,
+
+                        subtitle: subtitle,
+
+                        content: content,
+
+                        published: published
+
+                    });
+
+
+            if (error) {
+
+                status.textContent =
+                    "Error: " + error.message;
+
+                return;
+
+            }
+
+
+            if (published) {
+
+                status.textContent =
+                    "Blog published successfully!";
+
+            } else {
+
+                status.textContent =
+                    "Draft saved successfully!";
+
+            }
+
+
+            document.getElementById("title").value = "";
+
+            document.getElementById("subtitle").value = "";
+
+            document.getElementById("content").value = "";
+
+        }
+
+
+        document
+            .getElementById("draft-button")
+            .addEventListener("click", function() {
+
+                savePost(false);
+
+            });
+
+
+        document
+            .getElementById("publish-button")
+            .addEventListener("click", function() {
+
+                savePost(true);
+
+            });
+
+    </script>
+
+
+</body>
+
+</html>
