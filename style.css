@@ -553,3 +553,90 @@ footer {
     margin-top: 25px;
     color: #aaaaaa;
 }
+
+.posts-section {
+    margin-top: 80px;
+}
+
+.posts-section h2 {
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+.dashboard-post-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+
+    padding: 25px;
+
+    margin-bottom: 15px;
+
+    background: #151515;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+}
+
+.dashboard-post-info {
+    flex: 1;
+}
+
+.dashboard-post-info h3 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.dashboard-post-info > p:not(.blog-date) {
+    color: #999999;
+    margin-bottom: 12px;
+}
+
+.post-status {
+    display: inline-block;
+    padding: 5px 10px;
+
+    border: 1px solid #444444;
+    border-radius: 20px;
+
+    font-size: 13px;
+    color: #bbbbbb;
+}
+
+.dashboard-post-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.dashboard-post-actions button {
+    padding: 10px 18px;
+
+    background: transparent;
+    color: white;
+
+    border: 1px solid #444444;
+    border-radius: 7px;
+
+    cursor: pointer;
+}
+
+.dashboard-post-actions button:hover {
+    background: #222222;
+}
+
+@media (max-width: 700px) {
+
+    .dashboard-post-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .dashboard-post-actions {
+        width: 100%;
+    }
+
+    .dashboard-post-actions button {
+        flex: 1;
+    }
+
+}
