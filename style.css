@@ -1,4 +1,4 @@
-```css
+
 /* =========================
    BASIC SETTINGS
 ========================= */
@@ -366,4 +366,45 @@ footer {
     }
 
 }
-```
+
+/* =========================
+   BLOG POST PAGE
+========================= */
+
+.blog-page {
+    max-width: 800px;
+
+    margin: 0 auto;
+
+    padding: 160px 30px 100px;
+}
+
+
+.blog-page h1 {
+    font-size: 60px;
+
+    line-height: 1.1;
+
+    margin-bottom: 20px;
+}
+
+
+.blog-subtitle {
+    font-size: 20px;
+
+    color: #999999;
+
+    margin-bottom: 50px;
+}
+
+
+.blog-page article p {
+    font-size: 19px;
+
+    line-height: 1.9;
+
+    color: #cccccc;
+
+    margin-bottom: 30px;
+}
+
