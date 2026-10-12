@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <title>Prapanj K T</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 
@@ -23,10 +25,15 @@
         </div>
 
         <div class="nav-links">
+
             <a href="#home">Home</a>
+
             <a href="#about">About Me</a>
+
             <a href="#blog">Blog</a>
+
             <a href="#contact">Contact</a>
+
         </div>
 
     </nav>
@@ -70,10 +77,18 @@
 
     <section id="about" class="content-section">
 
-        <h2>About Me</h2>
+        <h2>
+            About Me
+        </h2>
 
         <p>
             Hello! I am Prapanj K T.
+        </p>
+
+        <p>
+            Mainly I am doing this to document what I do, how I grow
+            or how I fall. This is solely made from my growth and if
+            it helps somebody awesome.
         </p>
 
     </section>
@@ -84,27 +99,21 @@
 
     <section id="blog" class="content-section">
 
-        <h2>Blog</h2>
+        <h2>
+            Blog
+        </h2>
 
         <p class="blog-intro">
-          I write here my progress and downfall.
+            This is my little corner of the internet where I write
+            about the things I learn, the ideas I find interesting,
+            and whatever catches my curiosity.
         </p>
 
 
-        <div class="blog-card">
-
-            <p class="blog-date">
-                October 2026
-            </p>
-
-            <h3>
-                <a href="blog1.html">
-                    My first Post
-                </a>
-            </h3>
+        <div id="blog-list">
 
             <p>
-                A small beginning to my personal corner of the internet.
+                Loading posts...
             </p>
 
         </div>
@@ -117,13 +126,18 @@
 
     <section id="contact" class="content-section">
 
-        <h2>Contact</h2>
+        <h2>
+            Contact
+        </h2>
 
         <p>
             If you would like to get in touch, you can reach me here.
         </p>
 
-        <a href="mailto:ktprapanj@gmail.com" class="contact-button">
+        <a
+            href="mailto:ktprapanj@gmail.com"
+            class="contact-button"
+        >
             Send me an email
         </a>
 
@@ -140,6 +154,145 @@
         </p>
 
     </footer>
+
+
+
+    <!-- Supabase -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <script>
+
+        const SUPABASE_URL =
+            "https://jgafjlpkdfamvoywggtt.supabase.co";
+
+
+        const SUPABASE_PUBLISHABLE_KEY =
+            "sb_publishable_QF5kwYRijdV_0xNomd3LWw_893w-ND2";
+
+
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_PUBLISHABLE_KEY
+            );
+
+
+
+        async function loadPublishedPosts() {
+
+            const blogList =
+                document.getElementById("blog-list");
+
+
+            const { data, error } =
+                await supabaseClient
+                    .from("posts")
+                    .select("*")
+                    .eq("published", true)
+                    .order("created_at", {
+                        ascending: false
+                    });
+
+
+            if (error) {
+
+                blogList.innerHTML =
+                    "<p>Unable to load blog posts.</p>";
+
+                console.error(error);
+
+                return;
+
+            }
+
+
+            if (!data || data.length === 0) {
+
+                blogList.innerHTML =
+                    "<p>No blog posts yet. Check back soon.</p>";
+
+                return;
+
+            }
+
+
+            blogList.innerHTML = "";
+
+
+            data.forEach(function(post) {
+
+                const card =
+                    document.createElement("div");
+
+
+                card.className =
+                    "blog-card";
+
+
+                const date =
+                    new Date(post.created_at)
+                        .toLocaleDateString(
+                            "en-IN",
+                            {
+                                month: "long",
+                                year: "numeric"
+                            }
+                        );
+
+
+                card.innerHTML = `
+
+                    <p class="blog-date">
+                        ${date}
+                    </p>
+
+                    <h3>
+                        ${escapeHTML(post.title)}
+                    </h3>
+
+                    <p>
+                        ${escapeHTML(
+                            post.subtitle || ""
+                        )}
+                    </p>
+
+                    <p class="blog-preview">
+                        ${escapeHTML(
+                            post.content.substring(0, 180)
+                        )}${post.content.length > 180 ? "..." : ""}
+                    </p>
+
+                `;
+
+
+                blogList.appendChild(card);
+
+            });
+
+        }
+
+
+
+        function escapeHTML(text) {
+
+            const div =
+                document.createElement("div");
+
+
+            div.textContent =
+                text;
+
+
+            return div.innerHTML;
+
+        }
+
+
+        loadPublishedPosts();
+
+    </script>
 
 
 </body>
